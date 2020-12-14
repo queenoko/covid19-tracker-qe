@@ -10,8 +10,15 @@ function App() {
   const [countryInfo, setCountryInfo] = useState({});
 
   useEffect(() => {
-    //async = sends a request, wait for it, do something with it
+    fetch("https://disease.sh/v3/covid-19/all")
+    .then((response) => response.json())
+    .then(data => {
+      setCountryInfo(data);
+    })
+  }, [])
 
+  useEffect(() => {
+    //async = sends a request, wait for it, do something with it
     const getCountriesData = async () => {
       await fetch("https://disease.sh/v3/covid-19/countries")
       .then((response) => response.json())
